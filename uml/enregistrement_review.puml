@@ -1,6 +1,12 @@
 @startuml
 
-file reviews
-file tableau_review
+actor reviewer
+file review
+file tableau_reviews
+stack zone_review
+
+reviewer --> review : valide
+review --> tableau_reviews : s'enregistre
+tableau_reviews <-- zone_review : appartient
 
 @enduml

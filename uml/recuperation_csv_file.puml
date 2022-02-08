@@ -1,0 +1,10 @@
+@startuml
+
+actor enseignant
+stack zone_review
+file tableau_reviews
+
+enseignant --> tableau_reviews : recupère
+tableau_reviews <-- zone_review : appartient
+
+@enduml
