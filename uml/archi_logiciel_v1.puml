@@ -1,0 +1,51 @@
+@startuml
+
+actor Etudiant
+actor Enseignant
+
+actor Producteur
+actor Evaluateur
+
+entity Platon
+entity Peer_Eval
+
+entity Gestionnaire_de_connection
+entity Profil
+
+
+entity Zone_Cours
+entity Zone_Projet
+
+entity Production
+
+entity csv
+
+entity Review
+
+entity Grille_critere
+
+Platon -> Peer_Eval : Implemente
+Peer_Eval -> Gestionnaire_de_connection
+Gestionnaire_de_connection -> Profil
+Profil -> Enseignant
+Profil -> Etudiant
+Enseignant -> Zone_Cours : ouvre
+Enseignant -> Zone_Projet : ouvre
+Zone_Cours -> Zone_Projet : contient 
+Zone_Projet -> Production : contient
+Producteur -> Production : active la demande de review sur sa production
+Evaluateur -> Review : effectue
+Grille_critere -> Production : concerne
+Zone_Projet -> csv : genere
+Enseignant -> csv : recupere
+
+Enseignant -> Producteur : est
+Enseignant -> Evaluateur : est
+
+Etudiant -> Producteur : est
+Etudiant -> Evaluateur : est
+Review -> Grille_critere : se fait avec
+csv <- Grille_critere : est contenue
+
+
+@enduml
