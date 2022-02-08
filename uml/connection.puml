@@ -1,0 +1,14 @@
+@startuml
+
+actor enseignant
+actor etudiant
+
+entity platon
+entity peer_evaluator
+
+enseignant --> platon : se connecte
+etudiant --> platon : se connecte
+
+platon --> peer_evaluator : donne accès
+
+@enduml

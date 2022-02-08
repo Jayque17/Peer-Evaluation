@@ -1,0 +1,8 @@
+@startuml
+
+entity platon
+entity peer_evaluation
+
+platon <-- peer_evaluation : est integre
+
+@enduml

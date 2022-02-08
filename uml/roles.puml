@@ -1,0 +1,20 @@
+@startuml
+
+actor enseignant
+actor etudiant
+
+actor reviewer
+actor producteur
+
+entity peer_evaluator
+
+enseignant --> reviewer : a le role
+enseignant --> producteur : a le role
+
+etudiant --> reviewer : a le role
+etudiant --> producteur : a le role
+
+peer_evaluator --> reviewer : attribution du role
+peer_evaluator --> producteur : attribution du role
+
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+
+actor reviewer
+actor producteur
+
+stack zone_rendu
+file grille_critere
+entity production
+
+producteur --> production : produit
+reviewer --> grille_critere : annote
+grille_critere --> production : evalue
+grille_critere <--> production : 1 et unique
+grille_critere <-- zone_rendu : possède
+
+
+@enduml

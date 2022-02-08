@@ -1,0 +1,13 @@
+@startuml
+
+actor enseignant
+
+collections cours
+
+stack zone_review
+
+enseignant --> cours : cree
+enseignant --> zone_review : ouvre
+cours <-- zone_review : appartient
+
+@enduml
