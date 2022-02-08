@@ -1,0 +1,23 @@
+@startuml
+
+package connection
+package default_grille_critere
+package effectuer_une_review
+package integration
+package recuperation_csv_file
+package roles
+package zone_review
+package enregistrement_review
+
+integration <-- connection : dépend
+connection --> roles : acquisition
+connection --> zone_review : ouverture par enseignant
+default_grille_critere --> zone_review : se place dans
+effectuer_une_review --> zone_review : dépend de
+effectuer_une_review --> default_grille_critere : utilise pour evaluer
+enregistrement_review <-- zone_review : possède 1 seul tableau de reviews
+enregistrement_review <-- effectuer_une_review : ajoute 1 ligne dans le tableau de review
+enregistrement_review <-- default_grille_critere : rassemble les reviews
+enregistrement_review --> recuperation_csv_file : faite par l'enseignant
+
+@enduml
