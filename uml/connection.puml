@@ -1,14 +1,13 @@
 @startuml
 
-actor enseignant
-actor etudiant
+actor user
+usecase login
+entity moodle
+entity PLaTon
 
-entity platon
-entity peer_evaluator
-
-enseignant --> platon : se connecte
-etudiant --> platon : se connecte
-
-platon --> peer_evaluator : donne accès
+user --> login : se connecte
+user --> moodle : est connecté
+moodle <-- login #line.dashed : récupère les identifiants
+login --> PLaTon : donne accès
 
 @enduml
