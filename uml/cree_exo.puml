@@ -1,0 +1,17 @@
+@startuml
+
+actor EnsRespo
+file grille_critere
+file grille_retour_review
+file exo
+label tags
+
+EnsRespo --> exo : édite
+EnsRespo --> grille_retour_review : édite
+EnsRespo --> grille_critere : édite
+grille_critere --> exo : sert à évaluer
+EnsRespo --> tags : renseigne
+tags --> exo : décrivent les compétences\névaluées par cet exo
+grille_retour_review --> grille_critere : annote/commente
+
+@enduml

@@ -3,15 +3,19 @@
 actor reviewer
 actor producteur
 
-stack zone_review
 file grille_critere
 entity production
+file exo 
+file grille_retour_review
 
-producteur --> production : produit
-reviewer --> grille_critere : annote
-grille_critere --> production : evalue
+producteur --> production : produit (2)
+reviewer --> grille_critere : annote (3)
+grille_critere --> production : evalue (3)
 grille_critere <--> production : 1 et unique
-grille_critere <-- zone_review : possède
+producteur --> exo : lis (1)
+production --> exo #line.dashed : répond à l'exo
+producteur --> grille_retour_review : annote (4)
+grille_retour_review --> grille_critere : évalue (4)
 
 
 @enduml
