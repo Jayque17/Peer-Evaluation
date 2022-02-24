@@ -1,0 +1,61 @@
+@startuml
+
+actor EnsRespo
+actor Eleve
+actor Prof
+
+usecase Cours_Struct_par_P2P #PaleVioletRed
+usecase inscription_élèves #Pink
+entity moodle 
+usecase charger_ressources #Pink
+usecase retour_sur_les_review_élèves #Pink
+usecase exos #Pink
+usecase compétences #Pink
+usecase description_des_compétences #Pink
+usecase édition_grille_eval #Pink
+usecase review #Pink
+usecase review_de_la_review #Pink
+
+usecase publier_une_review #PaleTurquoise
+usecase répondre_à_l_exo #PaleTurquoise
+usecase attribuer_les_reviews #PaleTurquoise
+
+usecase evaluation_review_prof #PaleTurquoise
+
+control manuel
+control auto
+control programmable
+control default
+
+EnsRespo --> Cours_Struct_par_P2P #line:red;line.bold;
+Cours_Struct_par_P2P --> inscription_élèves
+moodle --> inscription_élèves #line.dashed : extends
+Cours_Struct_par_P2P --> charger_ressources
+charger_ressources --> exos
+charger_ressources --> compétences
+charger_ressources --> édition_grille_eval
+édition_grille_eval --> review
+édition_grille_eval --> review_de_la_review
+Cours_Struct_par_P2P --> retour_sur_les_review_élèves
+charger_ressources --> description_des_compétences
+
+Eleve --> publier_une_review
+Eleve --> répondre_à_l_exo 
+publier_une_review --> attribuer_les_reviews #line.dashed
+programmable --> auto #line.dashed
+default --> auto #line.dashed : comportement\nimplémenté de base
+auto --> attribuer_les_reviews #line.dashed
+manuel --> attribuer_les_reviews #line.dashed : le prof\nchoisit qui review qui
+
+Prof --> evaluation_review_prof
+evaluation_review_prof --> publier_une_review #line.dashed : extends
+
+publier_une_review --> répondre_à_l_exo #line.dashed  
+publier_une_review --> inscription_élèves #line.dashed
+publier_une_review --> charger_ressources #line.dashed
+
+EnsRespo --> manuel #line.dashed
+EnsRespo --> programmable #line.dashed
+
+
+@enduml
