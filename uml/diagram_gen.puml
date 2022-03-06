@@ -5,57 +5,90 @@ actor Eleve
 actor Prof
 
 usecase Cours_Struct_par_P2P #PaleVioletRed
-usecase inscription_élèves #Pink
+usecase inscription_élèves_profs #PaleTurquoise
 entity moodle 
-usecase charger_ressources #Pink
-usecase retour_sur_les_review_élèves #Pink
-usecase exos #Pink
-usecase compétences #Pink
-usecase description_des_compétences #Pink
-usecase édition_grille_eval #Pink
-usecase review #Pink
-usecase review_de_la_review #Pink
+usecase charger_ressources #PaleTurquoise
+usecase retour_sur_les_review_élèves #PaleTurquoise
+usecase exos #PaleTurquoise
+usecase compétences #PaleTurquoise
+usecase description_des_compétences #PaleTurquoise
+usecase édition_grille_eval #PaleTurquoise
+usecase review #PaleTurquoise
+usecase review_de_la_review #Purple
 
 usecase publier_une_review #PaleTurquoise
-usecase répondre_à_l_exo #PaleTurquoise
+usecase repondre_a_l_exo #PaleTurquoise
 usecase attribuer_les_reviews #PaleTurquoise
 
 usecase evaluation_review_prof #PaleTurquoise
+usecase recuperation_data #PaleTurquoise
 
-control manuel
-control auto
-control programmable
-control default
+usecase depot_sur_la_platforme #Orange
+
+control manuel #Orange
+control auto #PaleTurquoise
+control programmable_personalisable #LimeGreen
+control default #PaleTurquoise
+control compteur_de_review #LimeGreen
+control compteur_deficit #LimeGreen
+control tags #LimeGreen
+control score_review #Purple
+control graph #Purple
 
 EnsRespo --> Cours_Struct_par_P2P #line:red;line.bold;
-Cours_Struct_par_P2P --> inscription_élèves
-moodle --> inscription_élèves #line.dashed : extends
-Cours_Struct_par_P2P --> charger_ressources
-charger_ressources --> exos
-charger_ressources --> compétences
-charger_ressources --> édition_grille_eval
-édition_grille_eval --> review
-édition_grille_eval --> review_de_la_review
-Cours_Struct_par_P2P --> retour_sur_les_review_élèves
-charger_ressources --> description_des_compétences
+Cours_Struct_par_P2P --> inscription_élèves_profs #line:blue;
+moodle --> inscription_élèves_profs #line.dashed : extends
+Cours_Struct_par_P2P --> charger_ressources #line:blue;
+charger_ressources --> exos #line:blue;
+charger_ressources --> compétences #line:blue;
+charger_ressources --> édition_grille_eval #line:blue;
+édition_grille_eval --> review #line:blue;
+édition_grille_eval --> review_de_la_review #line:purple;
+Cours_Struct_par_P2P --> retour_sur_les_review_élèves #line:blue;
+charger_ressources --> description_des_compétences #line:blue;
 
-Eleve --> publier_une_review
-Eleve --> répondre_à_l_exo 
-publier_une_review --> attribuer_les_reviews #line.dashed
-programmable --> auto #line.dashed
-default --> auto #line.dashed : comportement\nimplémenté de base
-auto --> attribuer_les_reviews #line.dashed
-manuel --> attribuer_les_reviews #line.dashed : le prof\nchoisit qui review qui
+Eleve --> publier_une_review #line:blue;
+Eleve --> repondre_a_l_exo #line:blue;
+publier_une_review --> attribuer_les_reviews #line:blue;line.dashed;
+programmable_personalisable --> auto #line:green;line.dashed;
+default --> auto #line:blue;line.dashed; : comportement\nimplémenté de base
+auto --> attribuer_les_reviews #line:blue;line.dashed;
+manuel --> attribuer_les_reviews #line:orange;line.dashed; : le prof\nchoisit qui review qui
 
-Prof --> evaluation_review_prof
-evaluation_review_prof --> publier_une_review #line.dashed : extends
+Prof --> evaluation_review_prof #line:blue;
+evaluation_review_prof --> publier_une_review #line:blue; : extends
 
-publier_une_review --> répondre_à_l_exo #line.dashed  
-publier_une_review --> inscription_élèves #line.dashed
-publier_une_review --> charger_ressources #line.dashed
+publier_une_review --> repondre_a_l_exo #line:blue;line.dashed;  
+publier_une_review --> inscription_élèves_profs #line:blue;line.dashed;
+publier_une_review --> charger_ressources #line:blue;line.dashed;
 
-EnsRespo --> manuel #line.dashed
-EnsRespo --> programmable #line.dashed
+EnsRespo --> manuel #line:orange;line.dashed;
+EnsRespo --> programmable_personalisable #line:green;line.dashed;
 
+review --> recuperation_data #line:blue;
+review_de_la_review --> recuperation_data #line:purple;
+EnsRespo --> recuperation_data #line:blue; : via fichier csv 
+
+note right of inscription_élèves_profs #PaleTurquoise : attribution des rôles
+
+Eleve --> depot_sur_la_platforme #line:orange;
+depot_sur_la_platforme --> repondre_a_l_exo #line:orange
+repondre_a_l_exo --> EnsRespo #line:orange;line.dashed; : notification si manque de review
+compteur_de_review --> Eleve #line:green;
+compteur_deficit --> Eleve #line:green;
+compteur_de_review --> publier_une_review #line:green;line.dashed;
+compteur_deficit --> publier_une_review #line:green;line.dashed;
+compteur_deficit --> repondre_a_l_exo #line:green;line.dashed;
+tags --> exos #line:green;line.dashed;
+tags --> recuperation_data #line:green;line.dashed;
+score_review --> review_de_la_review #line:purple;line.dashed;
+score_review --> Eleve #line:purple
+graph --> Eleve #line:purple
+graph --> Prof #line:purple
+graph --> EnsRespo #line:purple
+graph --> repondre_a_l_exo #line:purple;line.dashed;
+graph --> publier_une_review #line:purple;line.dashed;
+graph --> score_review #line:purple;line.dashed;
+graph --> tags #line:purple;line.dashed;
 
 @enduml

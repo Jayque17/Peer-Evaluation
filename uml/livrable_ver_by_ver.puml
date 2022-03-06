@@ -1,13 +1,13 @@
 @startuml
 
-package connection
-package default_grille_critere
-package effectuer_une_review
-package integration
-package recuperation_csv_file
-package roles
-package zone_review
-package enregistrement_review
+component connection
+component default_grille_critere
+component effectuer_une_review
+component integration
+component recuperation_csv_file
+component roles
+component zone_review
+component enregistrement_review
 
 integration <-- connection : dépend
 connection --> roles : acquisition
